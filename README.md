@@ -23,7 +23,7 @@ See https://github.com/prometheus/alertmanager/ for an example configuration.
 ## Monitoring Additional Services
 
 [Prom-rancher-sd](https://github.com/DanielDent/prom-rancher-sd) is used to do automatic service discovery of Rancher services into Prometheus.
-Simply add the `com.danieldent.cowhand.prom.port` label to a service to specify the port on which Prometheus should scrape `/metrics/`.
+Simply add the `com.danieldent.cowhand.prom.port` label to a service to specify the port on which Prometheus should scrape `/metrics`.
 
 ## Future Ideas
 
