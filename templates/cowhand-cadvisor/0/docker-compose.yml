@@ -1,0 +1,24 @@
+cadvisor:
+  restart: always
+  labels:
+    io.rancher.scheduler.global: True
+    com.danieldent.cowhand.prom.port: 8080
+  image: google/cadvisor:latest
+  volumes:
+   - "/:/rootfs:ro"
+   - "/var/run:/var/run:rw"
+   - "/sys:/sys:ro"
+   - "/var/lib/docker/:/var/lib/docker:ro"
+  expose:
+   - "8080"
+  command:
+   - "-storage_driver=influxdb"
+   - "-storage_driver_db=${INFLUXDB_DB}"
+   - "-storage_driver_host=influxdb:8086"
+   - "-storage_driver_user=${INFLUXDB_USER}"
+   - "-storage_driver_password=${INFLUXDB_PASS}"
+   - "--storage_duration=1m"
+   - "--housekeeping_interval=15s"
+   - "--global_housekeeping_interval=1m0s"
+  external_links:
+    - ${INFLUXDB_SERVICE}:influxdb

@@ -1,0 +1,17 @@
+
+node-exporter:
+  restart: always
+  labels:
+    io.rancher.scheduler.global: True
+    com.danieldent.cowhand.prom.port: 9100
+  image: prom/node-exporter
+  volumes:
+   - "/proc:/host/proc"
+   - "/sys:/host/sys"
+   - "/:/rootfs:ro"
+  command:
+    - '-collector.procfs=/host/proc'
+    - '-collector.sysfs=/host/sys'
+    - '-collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+  expose:
+    - "9100"

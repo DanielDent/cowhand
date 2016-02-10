@@ -1,0 +1,7 @@
+name: Cowhand
+description: Monitoring and Alerting using Prometheus, InfluxDB, Grafana and Alertmanager
+version: 0
+category: Monitoring
+maintainer: Daniel Dent
+license: Apache 2.0
+projectURL: https://github.com/danieldent/cowhand

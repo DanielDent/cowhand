@@ -1,0 +1,101 @@
+
+.catalog:
+  name: "Cowhand"
+  version: "0"
+  description: "Monitoring and Alerting using Prometheus, InfluxDB, Grafana and Alertmanager"
+  questions:
+    - variable: "ALERTMANAGER_IMAGE"
+      type: "string"
+      label: "Docker image used for Alertmanager."
+      description: "Enables use of a custom image of Alertmanager. Required so you can add your alerting configuration."
+      default: "prom/alertmanager"
+      required: true
+    - variable: "GRAFANA_ADMIN_PASSWORD"
+      type: "string"
+      description: "Initial Grafana admin password"
+      default: "root"
+      required: true
+    - variable: "INFLUXDB_DB"
+      type: "string"
+      description: "InfluxDB database to be created on start"
+      default: "cadvisor"
+      required: true
+    - variable: "INFLUXDB_USER"
+      type: "string"
+      description: "InfluxDB admin user to create on start"
+      default: "root"
+      required: true
+    - variable: "INFLUXDB_PASS"
+      type: "string"
+      description: "InfluxDB initial password for admin user"
+      default: "root"
+      required: true
+    - variable: "HOST_LABEL"
+      type: "string"
+      description: "Host label required for Cowhand to run on a node"
+      default: "role=cowhand"
+      required: true
+    - variable: "VOL_PREFIX_ALERTMANAGER"
+      type: "string"
+      label: "Prefix/mountpoint for Alertmanager volume (can leave blank)"
+      required: false
+    - variable: "VOL_PREFIX_INFLUXDB"
+      type: "string"
+      label: "Prefix/mountpoint for InfluxDB volume (can leave blank)"
+      required: false
+    - variable: "VOL_PREFIX_GRAFANA_DATA"
+      type: "string"
+      label: "Prefix/mountpoint for Grafana data volume (can leave blank)"
+      required: false
+    - variable: "VOL_PREFIX_GRAFANA_LOGS"
+      type: "string"
+      label: "Prefix/mountpoint for Grafana logs volume (can leave blank)"
+      required: false
+    - variable: "VOL_PREFIX_PROMETHEUS"
+      type: "string"
+      label: "Prefix/mountpoint for Prometheus (can leave blank)"
+      required: false
+
+prometheus-rancher:
+  scale: 1
+  health_check:
+    port: 9090
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000
+
+influxdb:
+  scale: 1
+  health_check:
+    port: 8083
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000
+
+grafana:
+  scale: 1
+  health_check:
+    port: 3000
+    interval: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000
+
+alertmanager:
+  scale: 1
+  health_check:
+    port: 9093
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000

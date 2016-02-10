@@ -1,0 +1,15 @@
+
+.catalog:
+  name: "cowhand-node-exporter"
+  description: "Prometheus node-exporter for Cowhand"
+  version: 0
+
+node-exporter:
+  health_check:
+    port: 9100
+    interval: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000

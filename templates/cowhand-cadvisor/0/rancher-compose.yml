@@ -1,0 +1,37 @@
+
+.catalog:
+  name: "cowhand-cadvisor"
+  description: "Google cadvisor for Cowhand"
+  version: 0
+  questions:
+    - variable: "INFLUXDB_DB"
+      label: "InfluxDB Database"
+      description: "Database to send cadvisor metrics to."
+      type: "string"
+      default: "cadvisor"
+      required: true
+    - variable: "INFLUXDB_USER"
+      label: "InfluxDB Username"
+      type: "string"
+      default: "root"
+      required: true
+    - variable: "INFLUXDB_PASS"
+      label: "InfluxDB Password"
+      type: "string"
+      default: "root"
+      required: true
+    - variable: "INFLUXDB_SERVICE"
+      label: "InfluxDB Service"
+      type: "service"
+      default: "cowhand/influxdb"
+      required: true
+
+cadvisor:
+  health_check:
+    port: 8080
+    interval: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    request_line: "GET / HTTP/1.0"
+    healthy_threshold: 2
+    response_timeout: 2000

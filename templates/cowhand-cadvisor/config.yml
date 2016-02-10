@@ -1,0 +1,7 @@
+name: cowhand-cadvisor
+description: Google cadvisor for Cowhand
+version: 0
+category: Monitoring
+maintainer: Daniel Dent
+license: Apache 2.0
+projectURL: https://github.com/danieldent/cowhand
