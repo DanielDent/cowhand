@@ -35,7 +35,6 @@ Simply add the `com.danieldent.cowhand.prom.port` label to a service to specify 
   * Google cadvisor has issues with ZFS. See https://github.com/google/cadvisor/pull/1020#issuecomment-181153825.
   * Launching our own cadvisor instances is a waste of system resources - Rancher already creates cadvisor instances on every node. However, these instances do not appear to be accessible over the Rancher overlay network. Additionally, it is unclear if we could arrange for those instances to push metrics into InfluxDB.
   * InfluxDB appears to function but it has not been tested yet.
-  * prometheus-rancher gives error messages such as `level=error msg="Error reading file \"/prom-rancher-sd-data/rancher.json\": unexpected end of JSON input" source="file.go:196"`. I have not investigated to understand why. It's possible it would be desireable to create the file elsewhere on the disk and then move it into the data volume (so that updates to the file are atomic). It may be a JSON formatting issue. It may be something else entirely.'
 
 
 ## Desired Pull Requests
